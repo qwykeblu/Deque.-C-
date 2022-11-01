@@ -26,14 +26,6 @@ private:
     Node *pFront, *pRear;
     int mSize;
 public:
-    Node* getFrontPtr()
-    {
-        return pFront;
-    }
-    Node* getRearPtr()
-    {
-        return pRear;
-    }
     Deque()
     {
         pFront = pRear = NULL;
@@ -182,17 +174,27 @@ public:
     {
         return mSize;
     }
-    Node* reverse(Node* pFront)
+    void reverse()
     {
-        if (pFront == NULL || pFront->pNext == NULL)
-            return pFront;
-        // Recursive call
-        Node* rest = reverse(pFront->pNext);
-        pFront->pNext->pNext = pFront;
+        if (pFront == NULL &&  pRear == NULL)
+        {
+            cout << "Queue is empty!";
+        }
+        else 
+        {
+            Node* prev, * cur, * succ;
+            cur = prev = pFront;
+            cur = cur->pNext;
+            prev->pNext = NULL;
 
-        pFront->pNext = NULL;
-
-        return rest;
+            while (cur != NULL) {
+                succ = cur->pNext;
+                cur->pNext = prev;
+                prev = cur;
+                cur = succ;
+            }
+            pFront = prev;
+        }
     }
     bool isBelong(int data) 
     {
@@ -234,7 +236,6 @@ public:
 int main()
 {
     Deque deque; int num;
-    Node* head = deque.getFrontPtr();
     while (true)
     {
         int choice;
@@ -340,7 +341,7 @@ int main()
             break;
         case 12:
             cout << "Deque before reverse: ";  deque.show(); cout << endl;
-            cout << "Deque after reverse: ";  deque.reverse(head); cout << endl;
+            cout << "Deque after reverse: ";  deque.reverse(); cout << endl;
             system("pause");
             system("cls");
             break;
