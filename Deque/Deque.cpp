@@ -283,7 +283,14 @@ int main()
             system("cls");
             break;
         case 6:
-            cout << "Last element of deque : " << deque.getLast();
+            if (deque.isEmpty())
+            {
+                cout << "Deque is empty";
+            }
+            else
+            {
+                cout << "Last element of deque : " << deque.getLast();
+            }
             system("pause");
             system("cls");
             break;
