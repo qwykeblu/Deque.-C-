@@ -236,6 +236,7 @@ int main()
     while (true)
     {
         int choice;
+        cout << "Greetings!" << endl;//(changed title)
         cout << "\n0.Exit.\n1.Insertion(head).\n2.Insertion(rear).\n3.Deletion(head).\n4.Deletion(rear).\n5.Get head.\n6.Get rear.\n7.Check emptyness.\n8.Check size.\n9.Clear deque.\n10.Swap front and rear.\n11.Check belonginess.\n";
 
         cin >> choice;
