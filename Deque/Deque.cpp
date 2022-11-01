@@ -174,23 +174,17 @@ public:
     {
         return mSize;
     }
-    void reverse()
+    Node* reverse(Node* pFront)
     {
-        Node* cur = pFront;
-        Node* prev, * next = NULL;
-        if (isEmpty())
-        {
-            cout << "Deque is empty";
-        }
-        else
-        {
-            Node* cur = pFront;
-            while (cur != NULL)
-            {
+        if (pFront == NULL || pFront->pNext == NULL)
+            return pFront;
+        // Recursive call
+        Node* rest = reverse(pFront->pNext);
+        pFront->pNext->pNext = pFront;
 
-            }
-        }
-    
+        pFront->pNext = NULL;
+
+        return rest;
     }
     bool isBelong(int data) 
     {
@@ -232,7 +226,7 @@ public:
 int main()
 {
     Deque deque; int num;
-
+    
     while (true)
     {
         int choice;
