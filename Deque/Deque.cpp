@@ -10,7 +10,6 @@ struct Node
     Node* pPrev, *pNext;
     Node()
     {
-        this->mData = mData;
         pPrev = pNext = NULL;
     }
     Node(int value)
@@ -94,7 +93,7 @@ public:
             {
                 pFront->pPrev = NULL;
             }
-            free(temp);
+            delete temp;
             mSize--;
         }
     
@@ -118,7 +117,7 @@ public:
             {
                 pRear->pNext = NULL;
             }
-            free(temp);
+            delete temp;
             mSize--;
         }
     }
@@ -176,24 +175,14 @@ public:
     }
     void reverse()
     {
-        if (pFront == NULL &&  pRear == NULL)
-        {
-            cout << "Queue is empty!";
-        }
-        else 
-        {
-            Node* prev, * cur, * succ;
-            cur = prev = pFront;
-            cur = cur->pNext;
-            prev->pNext = NULL;
-
-            while (cur != NULL) {
-                succ = cur->pNext;
-                cur->pNext = prev;
-                prev = cur;
-                cur = succ;
-            }
+        auto curr = pFront; // current pointer
+        Node* prev = NULL; // previous pointer
+        while (curr) {
+            auto temp = curr->pNext;
+            curr->pNext = prev;
+            prev = curr;
             pFront = prev;
+            curr = temp;
         }
     }
     bool isBelong(int data) 
@@ -341,7 +330,7 @@ int main()
             break;
         case 12:
             cout << "Deque before reverse: ";  deque.show(); cout << endl;
-            cout << "Deque after reverse: ";  deque.reverse(); cout << endl;
+            cout << "Deque after reverse: ";  deque.reverse(); deque.show(); cout << endl;
             system("pause");
             system("cls");
             break;
